@@ -1,0 +1,21 @@
+
+version: 2
+
+models:
+  - name: student
+    description: "Student"
+    columns:
+      - name: id
+        description: "The primary key for student table"
+        tests:
+          - unique
+          - not_null
+
+  - name: student_detail
+    description: "Student registration details"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null

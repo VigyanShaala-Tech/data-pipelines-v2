@@ -1,4 +1,9 @@
-Welcome to your new dbt project!
+### Setup
+
+Install dbt core and mysql packages with the command
+
+$ pip install dbt-core dbt-mysql
+
 
 ### Using the starter project
 
