@@ -1,51 +1,56 @@
-
 version: 2
 
 models:
-  
   - name: student_details
     description: "Student registration details"
     columns:
       - name: student_id
         description: "The primary key for this table"
         tests:
-          -unique
+          - unique
+          - not_null
+
       - name: email
         description: "Valid email format"
         tests:
           - not_null
+
       - name: first_name
         description: "First name of the student."
         tests:
-          -not_null
+          - not_null
+
       - name: last_name
         description: "Last name of the student."
         tests:
-          -not_null
+          - not_null
+
       - name: is_female
         description: "Indicates whether the student is female"
         tests:
-          -not_null
+          - not_null
+
       - name: is_indian
         description: "Indicates whether the student is from India"
         tests:
-          -not_null
+          - not_null
+
       - name: phone
         description: "Student phone number"
         tests:
-          -not_null
+          - not_null
+
       - name: date_of_birth
-        description: "Students date of birth"
+        description: "Student's date of birth"
         tests:
-          -not_null
+          - not_null
+
       - name: caste
-        description: "Students caste"
+        description: "Student's caste"
         tests:
-          -not_null
+          - not_null
+
       - name: location_id
-        description: "Students live/Permanent location"
+        description: "Student's live/permanent location"
         tests:
-          -not_null
-
-
-  
+          - not_null
