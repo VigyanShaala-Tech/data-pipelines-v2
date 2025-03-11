@@ -6,15 +6,21 @@ models:
     description: "Student registration details"
     columns:
       - name: id
-        description: "The primary key for this table"
-        tests:
-          - unique
-          - not_null
+        constraints:
+          - type: not_null
+          - type: primary_key
       - name: email
+        data_type: text
       - name: first_name
+        data_type: text
       - name: last_name
-      - name: is_indian
+        data_type: string
+      - name: country
+      - name: gender
       - name: phone
       - name: date_of_birth
+        data_type: date
       - name: caste
+        data_type: enum
       - name: annual_family_income
+        data_type: text
