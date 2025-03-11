@@ -1,11 +1,18 @@
+### Folder structure
+1. `scripts` to have all python scripts related to data cleaning, pre-processing and post-processing etc
+2. `dbt` to hold all dbt related folders with models in `core` to keep original data tables related to our programs, `lms` to keep all the models that are pulled from LMS APIs and final reporting tables in `final`. Each of the subdirectories to have their own `schema.yml`.
+
+
 ### Setup
 
-Install dbt core and mysql packages with the command
+Install the required libraries/packages
 
-$ pip install dbt-core dbt-mysql
+$ pip install -r requirements.txt
+
+Setup `profiles.yml` with connection details as described (here)[https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml]
 
 
-### Using the starter project
+### Running
 
 Try running the following commands:
 - dbt run

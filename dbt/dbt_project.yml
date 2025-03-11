@@ -32,5 +32,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   data_pipelines_v2:
     # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+    core:
+      +materialized: table
+    lms:
+      +materialized: incremental
+    final:
+      +materialized: table

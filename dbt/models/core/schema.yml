@@ -1,0 +1,20 @@
+
+version: 2
+
+models:
+  - name: student
+    description: "Student registration details"
+    columns:
+      - name: id
+        description: "The primary key for this table"
+        tests:
+          - unique
+          - not_null
+      - name: email
+      - name: first_name
+      - name: last_name
+      - name: is_indian
+      - name: phone
+      - name: date_of_birth
+      - name: caste
+      - name: annual_family_income
