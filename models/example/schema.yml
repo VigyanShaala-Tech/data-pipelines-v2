@@ -2,20 +2,50 @@
 version: 2
 
 models:
-  - name: my_first_dbt_model
-    description: "A starter dbt model"
+  
+  - name: student_details
+    description: "Student registration details"
     columns:
-      - name: id
+      - name: student_id
         description: "The primary key for this table"
         tests:
-          - unique
+          -unique
+      - name: email
+        description: "Valid email format"
+        tests:
           - not_null
+      - name: first_name
+        description: "First name of the student."
+        tests:
+          -not_null
+      - name: last_name
+        description: "Last name of the student."
+        tests:
+          -not_null
+      - name: is_female
+        description: "Indicates whether the student is female"
+        tests:
+          -not_null
+      - name: is_indian
+        description: "Indicates whether the student is from India"
+        tests:
+          -not_null
+      - name: phone
+        description: "Student phone number"
+        tests:
+          -not_null
+      - name: date_of_birth
+        description: "Students date of birth"
+        tests:
+          -not_null
+      - name: caste
+        description: "Students caste"
+        tests:
+          -not_null
+      - name: location_id
+        description: "Students live/Permanent location"
+        tests:
+          -not_null
 
-  - name: my_second_dbt_model
-    description: "A starter dbt model"
-    columns:
-      - name: id
-        description: "The primary key for this table"
-        tests:
-          - unique
-          - not_null
+
+  
