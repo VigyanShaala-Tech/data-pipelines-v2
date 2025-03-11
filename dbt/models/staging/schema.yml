@@ -14,13 +14,21 @@ models:
       - name: first_name
         data_type: text
       - name: last_name
-        data_type: string
-      - name: country
+        data_type: text
+      - name: country # need to be changed to country_code once seeds are in place
+        data_type: text
       - name: gender
-      - name: phone
+        data_type: varchar(1)
+        description: F/M/O
+      - name: phone   # need to be validated and cleaned for [optional country code] and 10 digit number
+        data_type: text
       - name: date_of_birth
         data_type: date
       - name: caste
-        data_type: enum
+        data_type: text
       - name: annual_family_income
         data_type: text
+      # - name: created_at
+      #   data_type: timestamp
+      # - name: updated_at
+      #   data_type: timestamp

@@ -2,6 +2,7 @@
   indexes=[
       {'columns': ['email']}
     ],
+  on_schema_change='sync_all_columns',
   materialized='table'
 ) }}
 
@@ -38,4 +39,4 @@ with
     cast(Date_Of_Birth as date) as date_of_birth,
     Caste as caste
 
-FROM {{ source('source_data_csvs', 'raw_student_details') }} )
+FROM {{ source('raw', 'student_details') }} )
