@@ -10,7 +10,7 @@ Install the required libraries/packages
 
 $ pip install -r requirements.txt
 
-Setup `profiles.yml` with connection details on your local machine as described [here](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml)
+Setup `profiles.yml` with local Postgres connection details in `~/.dbt` as described [here](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml)
 
 
 ### Approach to data modelling
