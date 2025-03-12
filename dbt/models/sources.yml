@@ -1,0 +1,6 @@
+version: 2
+sources:
+  - name: raw
+    schema: raw_data  # The schema where your raw data tables are stored
+    tables:
+      # @@TO-DO: specifify all the raw table names and schemas after loading those 15+ csv files
