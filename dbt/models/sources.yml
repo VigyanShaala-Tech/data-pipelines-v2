@@ -4,3 +4,42 @@ sources:
     schema: raw_data  # The schema where your raw data tables are stored
     tables:
       # @@TO-DO: specifify all the raw table names and schemas after loading those 15+ csv files
+      - name: 01_general_information_sheet
+        description: "Raw student registration data from CSV file"
+      - name: 02_payment_details
+        description: "Raw payment details data from CSV file"
+      - name: 03_enroll_date
+        description: "Raw student enroll date data from CSV file"
+      - name: 04_student_progress
+        description: "Raw student progress data from CSV file"
+      - name: 05_overall_attendance_summary
+        description: "Raw student overall attendance data from CSV file"
+      - name: 06_performance_monitoring_summary
+        description: "Raw student performance monitoring data from CSV file"
+      - name: 07_summary_overall_performance_monitoring
+        description: "Raw student overall performance monitoring data from CSV file"
+      - name: 08_incubator_and_attendance_monitoring
+        description: "Raw student incubator and attendance data from CSV file"
+      - name: 09_weekly_attendence
+        description: "Raw student weekly attendance data from CSV file"
+      - name: 10_incubator_quiz_monitoring
+        description: "Raw student incubator quiz monitoring data from CSV file"
+      - name: 11_incubator_assignment_monitoring
+        description: "Raw student incubator assignment monitoring data from CSV file"
+      - name: 12_track_attendance_monitoring
+        description: "Raw student attendance monitoring data from CSV file"
+      - name: 13_live_tracks_attendance_monitoring
+        description: "Raw student live attendance monitoring data from CSV file"
+      - name: 14_internship_attendence_monitoring
+        description: "Raw student internship attendance monitoring data from CSV file"
+      - name: 15_batch_lastlogin_startdate
+      - name: 16_college_wise_leaderboard
+      - name: 17_accelerator_mentor_interaction_attendance
+      - name: 18_accelerator_project_performance_tracking
+        description: "Raw student accelerator project performance tracking data from CSV file"
+      - name: 19_accelerator_and_attendance_monitoring
+        description: "Raw student accelerator and attendance monitoring data from CSV file"
+      - name: 20_accelerator_overall_attendance_tracking
+        description: "Raw student accelerator overall attendance tracking data from CSV file"
+      - name: 21_timestamp_videos
+      - name: 22_cohort_wise_notation
