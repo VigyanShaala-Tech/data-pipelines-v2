@@ -3,7 +3,7 @@ version: 2
 
 models:
   - name: student
-    description: "Student registration details"
+    description: "Stores basic student information"
     columns:
       - name: id
         constraints:
@@ -32,3 +32,48 @@ models:
       #   data_type: timestamp
       # - name: updated_at
       #   data_type: timestamp
+
+  - name: location
+    description: "Student location details"
+    columns:
+      - name: id
+        constraints:
+          - type: not_null
+          - type: primary_key
+      - name: country
+        data_type: text
+      - name: state_union_territory
+        data_type: text
+      - name: district
+        data_type: text
+      - name: location_category 
+        data_type: text
+
+  - name: registration_details
+    description: "Stores student registration details and application reasons"
+    columns:
+      - name: id
+        constraints:
+          - type: not_null
+          - type: primary_key
+      - name: id
+        description: "References the student from student_details"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('student_details')
+              field: student_id
+      - name: assigned_through
+        data_type: text
+      - name: how_did_you_hear_about_us
+        data_type: text
+      - name: registration_date
+        data_type: date
+      - name: is_studying_STEM_fields 
+        data_type: boolean
+      - name: reason_for_applying 
+        data_type: text
+      - name: problems_faced_in_studies_and_career
+        data_type: text
+      
+      
