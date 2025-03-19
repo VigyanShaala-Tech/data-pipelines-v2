@@ -28,6 +28,13 @@ models:
         data_type: text
       - name: annual_family_income
         data_type: text
+      - name: id  #primary key in location table
+        description: "References the student location from location table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('location')
+              field: location_id
       # - name: created_at
       #   data_type: timestamp
       # - name: updated_at
@@ -56,12 +63,12 @@ models:
         constraints:
           - type: not_null
           - type: primary_key
-      - name: id
-        description: "References the student from student_details"
+      - name: id #primary key in student table
+        description: "References the student from student table"
         tests:
           - not_null
           - relationships:
-              to: ref('student_details')
+              to: ref('student')
               field: student_id
       - name: assigned_through
         data_type: text
