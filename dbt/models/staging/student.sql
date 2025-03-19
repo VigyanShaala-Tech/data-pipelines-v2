@@ -39,5 +39,5 @@ with student_cte as (
     "Caste_Category" as caste,
     "Annual_Family_Income" as annual_family_income
 
-  FROM {{ source('raw', '01_general_information_sheet') }}
+  FROM {{ source('raw', 'general_information_sheet') }}
 )
