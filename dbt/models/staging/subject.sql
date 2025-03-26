@@ -18,7 +18,7 @@ unique_subject_cte AS (
     SELECT 
         display_name,
         subject_name,
-        ROW_NUMBER() OVER (ORDER BY display_name) AS subject_id  -- Assigns unique ID per display_name
+        ROW_NUMBER() OVER (ORDER BY display_name) AS id  -- Assigns unique ID per display_name
     FROM (SELECT DISTINCT display_name,subject_name FROM subject_cte WHERE display_name IS NOT NULL) AS unique_display_names  -- Extract distinct display names first
 )
 

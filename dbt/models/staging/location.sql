@@ -19,7 +19,7 @@ WITH location_cte AS (
 
 unique_location_cte AS (
     SELECT 
-        ROW_NUMBER() OVER (ORDER BY country, state_union_territory, district, location_category) AS location_id,  
+        ROW_NUMBER() OVER (ORDER BY country, state_union_territory, district, location_category) AS id,  
         country,
         country_code,
         state_union_territory,

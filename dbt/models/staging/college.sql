@@ -25,7 +25,7 @@ unique_college_cte AS (
     SELECT 
         university,
         college,
-        ROW_NUMBER() OVER (ORDER BY college) AS college_id  -- Assigns unique ID per display_name
+        ROW_NUMBER() OVER (ORDER BY college) AS id  -- Assigns unique ID per display_name
     FROM (SELECT DISTINCT university,college FROM college_cte WHERE college IS NOT NULL) AS unique_college_names  -- Extract distinct college, university names
 )
 

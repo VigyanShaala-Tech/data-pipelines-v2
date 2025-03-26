@@ -17,7 +17,7 @@ unique_courses_cte AS (
     SELECT 
         course_name,
         display_name,
-        ROW_NUMBER() OVER (ORDER BY display_name) AS education_course_id  -- Assigns unique ID per display_name
+        ROW_NUMBER() OVER (ORDER BY display_name) AS id  -- Assigns unique ID per display_name
     FROM (SELECT DISTINCT display_name,course_name FROM education_course_cte WHERE display_name IS NOT NULL) AS unique_display_names  -- Extract distinct display and course names.
 )
 

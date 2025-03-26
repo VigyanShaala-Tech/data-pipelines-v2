@@ -6,7 +6,7 @@
 
 WITH education_category_cte AS (
     SELECT
-        ROW_NUMBER() OVER () AS education_category_id,
+        ROW_NUMBER() OVER () AS id,
         ---- To do 
         ---- Add a seed file for standard education category name and add a reference once the categories are finalized.
         CAST(NULL AS VARCHAR) AS category_name           

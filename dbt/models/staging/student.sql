@@ -9,7 +9,7 @@
 WITH student_cte AS (
   SELECT 
     -- TODO: Replace assined row number ids like 00001,00002,00003.. with actual student_id once a proper ID generation mechanism is implemented
-    LPAD(ROW_NUMBER() OVER (ORDER BY "Email")::TEXT, 5, '0') AS student_id,
+    LPAD(ROW_NUMBER() OVER (ORDER BY "Email")::TEXT, 5, '0') AS id,
     "Email" AS email,
 
     -- If name has "." in it, the part before it is last name, everything else is first name
