@@ -86,7 +86,7 @@ models:
   - name: subject
     description: "Stores students subject details"
     columns:
-      - name: subject_id
+      - name: id
         description: "Primary key for the subject table"
         tests:
           - not_null
