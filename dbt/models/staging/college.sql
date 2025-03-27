@@ -9,15 +9,8 @@
 
 WITH college_cte AS (
   SELECT 
-    CASE 
-      -- Add all the entries in college university column ending with 'University' under university column.
-      WHEN "Name_of_College_University" LIKE '%University' THEN "Name_of_College_University"
-      ELSE NULL
-    END AS university,
-    CASE 
-      WHEN "Name_of_College_University" NOT LIKE '%University' THEN "Name_of_College_University"
-      ELSE NULL
-    END AS college
+    "Name_of_College_University" AS college,     --- Most of the data entries present in this column contains college names and hence placed all raw_data under college.
+    NULL AS university
   FROM {{ source('raw', 'general_information_sheet') }}
 )
   

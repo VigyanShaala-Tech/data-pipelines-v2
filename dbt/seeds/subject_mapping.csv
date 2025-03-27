@@ -1,16 +1,18 @@
+----TO DO : Automate generating this file by a script later.
+
 subject_name,display_name    
-math,Mathematics
+mathematics,Mathematics
 physics,Physics
 chemistry,Chemistry
 biology,Biology
-cs,Computer Science
+computer science,Computer Science
 history,History
 geography,Geography
 economics,Economics
-english,English Literature
+english literature,English Literature
 psychology,Psychology
 sociology,Sociology
 philosophy,Philosophy
-political_science,Political Science
-business,Business Studies
+political science,Political Science
+business studies,Business Studies
 finance,Finance
