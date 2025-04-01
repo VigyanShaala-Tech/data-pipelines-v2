@@ -82,5 +82,115 @@ models:
         data_type: text
       - name: problems_faced_in_studies_and_career
         data_type: text
+
+  - name: subject
+    description: "Stores students subject details"
+    columns:
+      - name: id
+        description: "Primary key for the subject table"
+        tests:
+          - not_null
+          - primary_key
+
+      - name: subject_name
+        description: "Name of the subject"
+        data_type: text
+
+      - name: display_name
+        description: "Display name of the subject"
+        data_type: text
+
+
+  - name: education_category
+    description: "Education category details"
+    columns:
+      - name: id
+        description: "Primary key for the eduaction category table"
+        tests:
+          - not_null
+          - primary_key
+
+      - name: category_name
+        description: "Name of the category"
+        data_type: text
+  
+  - name: education_course
+    description: "Education details"
+    columns:
+      - name: id
+        description: "Primary key for the education course table"
+        tests:
+          - not_null
+          - primary_key
+
+      - name: course_name
+        description: "Name of the course"
+        data_type: text
+
+      - name: display_name
+        description: "Display name"
+
+  - name: college
+    description: "college details"
+    columns:
+      - name: id
+        description: "Primary key for the college table"
+        tests:
+          - not_null
+          - primary_key
       
+      - name: id  #primary key in location table
+        description: "References the location from location table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('location')
+              
+      - name: university
+        description: "Name of the university"
+        data_type: text
+
+      - name: college
+        description: "college name"
+
+  - name: documents
+    description: "student document details"
+    columns:
+      - name: id
+        description: "Primary key for the college table"
+        tests:
+          - not_null
+          - primary_key
       
+      - name: id  #primary key in location table
+        description: "References the student from student table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('student')
+              
+      - name: document_name
+        description: "Name of the document"
+        data_type: text
+
+      - name: document
+        description: "Uploaded document"
+        data_type: BYTEA
+
+  - name: programs
+    description: "Table containing program details including their codes, names, and start dates."
+    columns:
+      - name: program_code
+        description: "Short code identifier for the program (e.g., INC, ACC, STC)."
+        data_type: varchar(10)
+        tests:
+          - not_null
+          - unique
+
+      - name: program_name
+        description: "Full name of the program (e.g., Incubation Program, Accelerator Program, STEM Champions)."
+        data_type: varchar(100)
+
+      - name: start_date
+        description: "Start date of the program."
+        data_type: date    
