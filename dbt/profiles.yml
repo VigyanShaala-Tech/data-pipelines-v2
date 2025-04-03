@@ -1,0 +1,12 @@
+data_pipelines_v2_1:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: postgres
+      password: VS@123
+      port: 5432
+      dbname: She_for_STEM # or database instead of dbname
+      schema: raw_data
+      threads: 4

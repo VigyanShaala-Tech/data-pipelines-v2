@@ -22,7 +22,7 @@ WITH registration_cte AS (
       ELSE FALSE 
     END AS is_studying_STEM_fields,
     Null AS reason_for_applying,
-    Null AS problems_faced_in_studies_and_career?
+    Null AS problems_faced_in_studies_and_career
 
    
   FROM {{ source('raw', 'general_information_sheet') }}
