@@ -28,7 +28,11 @@ models:
         data_type: text
       - name: annual_family_income
         data_type: text
+<<<<<<< HEAD
       - name: location_id  # Renamed to avoid conflict #primary key in location table
+=======
+      - name: location_id  #primary key in location table
+>>>>>>> Populate_all_staging_models
         description: "References the student location from location table"
         tests:
           - not_null
@@ -56,7 +60,7 @@ models:
       - name: location_category 
         data_type: text
 
-  - name: registration_details
+  - name: student_registration_details
     description: "Stores student registration details and application reasons"
     columns:
       - name: id
@@ -153,7 +157,7 @@ models:
       - name: college
         description: "college name"
 
-  - name: documents
+  - name: student_documents
     description: "student document details"
     columns:
       - name: id
@@ -194,3 +198,99 @@ models:
       - name: start_date
         description: "Start date of the program."
         data_type: date    
+
+  - name: mentor_details
+    description: "Table containing mentor details"
+    columns:
+      - name: id
+        description: "Primary key for the college table"
+        tests:
+          - not_null
+          - primary_key
+      - name: mentor_name
+        description: "Name of the mentor"
+        data_type: varchar(50)
+      - name: email_id
+        description: "Email_id of the mentor"
+        data_type: varchar(50)
+      - name: linkedIn_url
+        description: "LinkedIn url of the mentor"
+        data_type: text
+      - name: current_position
+        description: "Current position"
+        data_type: varchar(100)
+      - name: phone_number
+        description: "Phone number"
+        data_type: varchar
+      - name: joined_on
+        description: "Date of joining"
+        data_type: date
+      - name: is_active
+        description: "Is mentor active in the cohort"
+        data_type: boolean
+
+  - name: cohort
+    description: "Table containing cohort details"
+    columns:
+      - name: cohort_code
+        description: "Primary key for the cohort table"
+        tests:
+          - not_null
+          - primary_key
+      - name: program_code
+        description: "References the Program code - INC,ACC,STC"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('programs')
+              field: program_code
+        data_type: varchar(50)
+      - name: cohort_number
+        description: "Cohort number"
+        data_type: varchar(50)
+      - name: cohort_name
+        description: "Cohort name"
+        data_type: varchar(50)
+      - name: type
+        description: "Type of cohort"   -- open, curriculum
+        data_type: enum
+      - name: start_date
+        description: "Start date of cohort"
+        data_type: date
+      - name: end_date
+        description: "End date of cohort"
+        data_type: date
+      - name: is_active
+        description: "Is the cohort active or not"
+        data_type: boolean
+
+
+  - name: student_cohort
+    description: "Table containing students cohort details"
+    columns:
+      - name: student_code
+        description: "Primary key for the student cohort table"
+        tests:
+          - not_null
+          - primary_key   
+      - name: student_id
+        description: "References the student ids from student table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('student')
+              field: student_id
+      - name: cohort_code
+        description: "References the cohort codes from cohort table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('cohort')
+              field: cohort_code
+      - name: is_leader
+        description: "Is student leader or not"
+        data_type: varchar(50)
+      - name: cohort_enroll_date
+        description: "Student enroll date in cohort"
+        data_type: date
+      

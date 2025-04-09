@@ -4,7 +4,7 @@
     materialized='table'
 ) }}
 
-WITH document_cte AS (
+WITH student_documents_cte AS (
     SELECT
         ROW_NUMBER() OVER () AS id,
         NULL AS document_name,
@@ -13,4 +13,4 @@ WITH document_cte AS (
   FROM {{ source('raw', 'general_information_sheet') }}
 )
     
-SELECT * FROM document_cte
+SELECT * FROM student_documents_cte
