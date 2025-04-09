@@ -12,7 +12,7 @@ WITH college_cte AS (
     "Name_of_College_University" AS college,     --- Most of the data entries present in this column contains college names and hence placed all raw_data under college.
     NULL AS university
   FROM {{ source('raw', 'general_information_sheet') }}
-)
+),
   
 unique_college_cte AS (
     SELECT 

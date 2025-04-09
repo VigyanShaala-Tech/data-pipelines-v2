@@ -12,7 +12,7 @@ WITH subject_cte AS (
     -- To do- populate the subject_mapping seed file with standard subject names.
     LEFT JOIN {{ ref('subject_mapping') }} mapping
     ON LOWER(subjects."Subject_Area") = LOWER(mapping.display_name)
-)
+),
 
 unique_subject_cte AS (
     SELECT 

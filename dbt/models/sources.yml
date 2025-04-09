@@ -43,3 +43,7 @@ sources:
         description: "Raw student accelerator overall attendance tracking data from CSV file"
       - name: timestamp_videos
       - name: cohort_wise_notation
+      - name: mentor_recruitment
+        description: "Raw mentor details data"
+      - name: cohort_details
+        description: "Raw cohort details data"
