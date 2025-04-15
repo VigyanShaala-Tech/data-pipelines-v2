@@ -72,17 +72,9 @@ models:
               field: student_id
       - name: assigned_through
         data_type: text
-      - name: how_did_you_hear_about_us
-        data_type: text
-      - name: registration_date
-        data_type: date
-      - name: is_studying_STEM_fields 
-        data_type: boolean
-      - name: reason_for_applying 
-        data_type: text
-      - name: problems_faced_in_studies_and_career
-        data_type: text
-
+      - name: form_details
+        data_type: jsonb
+  
   - name: subject
     description: "Stores students subject details"
     columns:
@@ -290,3 +282,54 @@ models:
         description: "Student enroll date in cohort"
         data_type: date
       
+
+
+  - name: student_education
+    description: "Table containing students education details"
+    columns:
+      - name: id
+        description: "Primary key for the student cohort table"
+        tests:
+          - not_null
+          - primary_key   
+      - name: student_id
+        description: "References the student ids from student table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('student')
+              field: student_id
+      - name: education_category_id
+        description: "References the education category id from education category table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('education_category')
+              field: education_category_id
+      - name: education_course_id
+        description: "References the education course id from education course table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('education_course')
+              field: education_course_id
+      - name: subject_id
+        description: "References the subject id from subject table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('subject')
+              field: subject_id
+      - name: college_id
+        description: "References the subject id from subject table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('college')
+              field: college_id
+      - name: start_year
+        description: "start year"
+        data_type: int
+      - name: end_year
+        description: "End year"
+        data_type: int

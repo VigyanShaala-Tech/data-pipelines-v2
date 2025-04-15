@@ -37,7 +37,7 @@ raw_mapping AS (
 
 ---To do: Put start_year, end_year logic based on the registration date and currently pursuing year. Also try to add the seed file for degree years.
 SELECT 
-    ROW_NUMBER() OVER () AS mapping_id, -- Unique ID for the mapping
+    ROW_NUMBER() OVER () AS id, -- Unique ID for the mapping
     student_data.id,
     subject_data.subject_id,
     college_data.college_id,
