@@ -41,8 +41,6 @@ final_data AS (
         END AS is_leader,
         CAST(NULL AS DATE) AS cohort_enroll_date
 
-        CAST(NULL AS DATE) AS cohort_enroll_date
-
     FROM raw_mapping rm
     LEFT JOIN student_data s 
         ON rm.student_id = s.student_id

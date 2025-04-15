@@ -28,11 +28,8 @@ models:
         data_type: text
       - name: annual_family_income
         data_type: text
-<<<<<<< HEAD
-      - name: location_id  # Renamed to avoid conflict #primary key in location table
-=======
+
       - name: location_id  #primary key in location table
->>>>>>> Populate_all_staging_models
         description: "References the student location from location table"
         tests:
           - not_null
@@ -252,7 +249,7 @@ models:
         description: "Cohort name"
         data_type: varchar(50)
       - name: type
-        description: "Type of cohort"   -- open, curriculum
+        description: "Type of cohort"   #open, curriculum
         data_type: enum
       - name: start_date
         description: "Start date of cohort"
