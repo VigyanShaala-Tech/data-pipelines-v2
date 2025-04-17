@@ -107,22 +107,7 @@ CREATE TABLE "education_category" (
 
 
 
-CREATE TABLE "accelerator_mentor_interaction" (
-    "id" int NOT NULL,
-    "student_id" int,
-    "mentor_id" int,
-    "cohort_code" varchar,
-    "week_number" int,
-    "total_session" int,
-    "average_duration  " int,
-    "attended_sessions " int,
-    "hours_spent " int,
-    "last_updated" timestamp,
-    PRIMARY KEY ("id"),
-    FOREIGN KEY ("student_id") REFERENCES student_details("id"),
-    FOREIGN KEY ("mentor_id") REFERENCES mentor_details("id"),
-    FOREIGN KEY ("cohort_code") REFERENCES cohort("cohort_code")
-);
+
 
 
 
@@ -325,26 +310,7 @@ CREATE TABLE "cohort_resource" (
 
 
 
-CREATE TABLE "accelerator_project_performance" (              
-    "id" int NOT NULL,
-    "student_id" int,
-    "mentor_id" int,
-    "cohort_code" varchar,
-    "resource_id ??" int,
-    "week_number" int,
-    "project_name" text,
-    "project_details" text,
-    "awareness_score" int,
-    "attentiveness_score" int,
-    "quality_score" int,
-    "overall_rating" int,
-    "last_updated" timestamp,
-    PRIMARY KEY ("id"),
-    FOREIGN KEY ("student_id") REFERENCES student_details("id"),
-    FOREIGN KEY ("mentor_id") REFERENCES mentor_details("id"),
-    FOREIGN KEY ("cohort_code") REFERENCES cohort("cohort_code"),
-    FOREIGN KEY ("resource_id") REFERENCES resource("id")
-);
+
 
 
 
@@ -411,4 +377,103 @@ CREATE TABLE "student_pre_recorded" (
     FOREIGN KEY ("student_id") REFERENCES student_details("id"),
     FOREIGN KEY ("resource_id") REFERENCES resource("id"),
     FOREIGN KEY ("cohort_code") REFERENCES cohort("cohort_code")
+);
+
+
+CREATE TABLE "accelerator_project_details" (              
+    "id" int NOT NULL,
+    "cohort_code" varchar,
+    "project_title" varchar,
+    "description" text,
+    "marks" int,
+    "start_date" date,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("cohort_code") REFERENCES cohort("cohort_code")
+);
+
+
+
+CREATE TABLE "accelerator_project_details_cost" (              
+    "id" int NOT NULL,
+    "project_details_id" int,
+    "payment_details_id" int,
+    "amount_inr" int,
+    "is_paid" boolean,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("project_details_id") REFERENCES accelerator_project_details("id"),
+    FOREIGN KEY ("payment_details_id") REFERENCES payment_details("id")
+);
+
+
+
+
+CREATE TABLE "accelerator_mentor_pre_recorded" (              
+    "id" int NOT NULL,
+    "mentor_id" int,
+    "resource_id" int,
+    "cohort_code" varchar,
+    "watchtime(duration in min)" int,
+    "watched_on" date,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("mentor_id") REFERENCES mentor_details("id"),
+    FOREIGN KEY ("resource_id") REFERENCES resource("id"),
+    FOREIGN KEY ("cohort_code") REFERENCES cohort("cohort_code")
+); 
+
+
+
+
+CREATE TABLE "accelerator_mentor_project" (              
+    "id" int NOT NULL,
+    "mentor_id" int,
+    "project_details_id" int,
+    "cohort_code" varchar,
+    "is_active" boolean,
+    "dropout_reason" text,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("mentor_id") REFERENCES mentor_details("id"),
+    FOREIGN KEY ("project_details_id") REFERENCES accelerator_project_details("id"),
+    FOREIGN KEY ("cohort_code") REFERENCES cohort("cohort_code")
+); 
+
+
+
+CREATE TABLE "accelerator_student_project_performance" (              
+    "id" int NOT NULL,
+    "student_id" int,
+    "project_details_id" int,
+    "awareness_score" int,
+    "attentiveness_score" int,
+    "quality_score" int,
+    "tasks_assigned" text,
+    "theme" enum,           --- Week 1 :Project Initiation and Goal Setting, Week 2 :Project Planning and Development, Week 3:Review and Experimental Design(Capture attention)....
+    "7E learning phase for this week" enum,   -- Elicit-Week 1-2, Engage -Week 3-5, Explore- Week 6-8, Explain -Week 9,....
+    "is_active" boolean,
+    "updated_at" timestamp,
+    "dropout_reason" text,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("student_id") REFERENCES student_details("id"),
+    FOREIGN KEY ("project_details_id") REFERENCES accelerator_project_details("id")
+);
+
+
+
+---Need clarity regarding whether to keep the fields like interactions related to whatsapp as JSONB or not. For now have kept it as column fields.
+CREATE TABLE "accelerator_student_mentor_Interaction" (                
+    "id" int NOT NULL,
+    "student_id" int,
+    "mentor_id" int,
+    "project_details_id" int,
+    "total_session" int,
+    "average_duration" int,
+    "attended_sessions" int,
+    "interacted_on_whatsapp" boolean,    ---Yes,No       
+    "number_of_whatsapp_interaction" int,   
+    "quality_of_interaction" enum,           --- Excellent,Good,Fair,Poor
+    "week's interactions helped to progress towards project goals" enum,  ----Not at all,Somewhat,Yes, substantially
+    "updated_at" date,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("student_id") REFERENCES student_details("id"),
+    FOREIGN KEY ("mentor_id") REFERENCES mentor_details("id"),
+    FOREIGN KEY ("project_details_id") REFERENCES accelerator_project_details("id")
 );
