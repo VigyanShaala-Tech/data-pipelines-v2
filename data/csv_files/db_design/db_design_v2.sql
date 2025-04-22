@@ -256,7 +256,7 @@ CREATE TABLE "student_session" (
     "watched on" date,
     PRIMARY KEY ("id"),
     FOREIGN KEY ("student_id") REFERENCES student_details("id"),
-    FOREIGN KEY ("session_id") REFERENCES session("id")
+    FOREIGN KEY ("session_id") REFERENCES live_session("id")
 );
 
 
@@ -266,6 +266,7 @@ CREATE TABLE "student_quiz" (
     "student_id" int,
     "resource_id" int,
     "cohort_code" varchar(6),
+    "marks" int,
     "max_marks" int,
     "reattempts" int,
     "attempted_at" timestamp,
@@ -291,7 +292,7 @@ CREATE TABLE "mentor_session" (
     "session_id" int,
     "mentor_id" int,
     PRIMARY KEY ("id"),
-    FOREIGN KEY ("session_id") REFERENCES session("id"),
+    FOREIGN KEY ("session_id") REFERENCES live_session("id"),
     FOREIGN KEY ("mentor_id") REFERENCES mentor_details("id")
 );
 
@@ -328,15 +329,13 @@ CREATE TABLE "referral_college_professor" (
 
 
 
-CREATE TABLE "session" (
+CREATE TABLE "live_session" (
     "id" int NOT NULL,
     "cohort_code" varchar(6),
     "session_name" text,
     "type" enum,                    -- type-  masterclass, SUK, workshop
     "duration(in minutes)" int,
-    "is_pre_recorded" boolean,      
-    "created_at" date,
-    "updated_at" date,
+    "conducted_on" timestamp,
     PRIMARY KEY ("id"),
     FOREIGN KEY ("cohort_code") REFERENCES cohort("cohort_code")
 );
@@ -348,7 +347,7 @@ CREATE TABLE "session_resource" (
     "session_id" int,
     "resource_id" int,
     PRIMARY KEY ("id"),
-    FOREIGN KEY ("session_id") REFERENCES session("id"),
+    FOREIGN KEY ("session_id") REFERENCES live_session("id"),
     FOREIGN KEY ("resource_id") REFERENCES resource("id")
 );
 
@@ -387,6 +386,7 @@ CREATE TABLE "accelerator_project_details" (
     "project_title" text,
     "description" text,
     "marks" int,
+    "max_marks" int
     "start_date" date,
     "end_date" date,
     PRIMARY KEY ("id"),
