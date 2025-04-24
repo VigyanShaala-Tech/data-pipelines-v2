@@ -252,7 +252,7 @@ CREATE TABLE "student_session" (
     "id" int NOT NULL,
     "student_id" int,
     "session_id" int,
-    "duration(in minutes)" int,
+    "duration_in_min" int,
     "watched on" date,
     PRIMARY KEY ("id"),
     FOREIGN KEY ("student_id") REFERENCES student_details("id"),
@@ -334,7 +334,8 @@ CREATE TABLE "live_session" (
     "cohort_code" varchar(6),
     "session_name" text,
     "type" enum,                    -- type-  masterclass, SUK, workshop
-    "duration(in minutes)" int,
+    "duration_in_min" int,
+    "max_duration_in_min" int,
     "conducted_on" timestamp,
     PRIMARY KEY ("id"),
     FOREIGN KEY ("cohort_code") REFERENCES cohort("cohort_code")
