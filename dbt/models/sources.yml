@@ -47,3 +47,7 @@ sources:
         description: "Raw mentor details data"
       - name: cohort_details
         description: "Raw cohort details data"
+      - name: session_details
+        description: "Raw session_details data"
+      - name: student_session_info
+        description: "Raw student attended session details data"

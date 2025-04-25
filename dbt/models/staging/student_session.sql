@@ -1,3 +1,9 @@
+{{ config(
+    indexes=[ {'columns': ['session']} ],
+    on_schema_change='sync_all_columns',
+    materialized='table'
+) }}
+
 WITH cohort_data AS (
     SELECT
         cohort_code,
@@ -30,7 +36,7 @@ live_session_data AS (
     FROM {{ ref('live_session') }} 
 ),
 
-
+--- Getting required column fields from the raw student session monitoring data
 student_session_monitoring_data AS (
     SELECT
         "Email" AS email,
@@ -149,7 +155,9 @@ final_data AS (
         ON sl.cohort_code = cl.cohort_code
 ),
 
---- "Unnest transforms all the session duration"
+
+--- "Unnest transforms the final data table into pivoted form. Added session column field to map session names and recorded their attended durations for students in corresponding column named duration_in_mins"
+--- The session_id column will be null for all the incubators as no session wise student attendance was monitored. Added in session column field here as they are not mapped to session_id.
 student_session_data AS (
     SELECT
         id,

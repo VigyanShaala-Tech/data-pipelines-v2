@@ -12,6 +12,7 @@ WITH cohort_data AS (
     FROM {{ ref('cohort') }}
 ),
 
+--Renamed table name to live_session.
 live_session_detail AS (
     SELECT
         ROW_NUMBER() OVER () AS id,  -- Auto-generates a unique ID for session
