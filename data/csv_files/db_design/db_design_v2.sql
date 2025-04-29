@@ -219,7 +219,7 @@ CREATE TABLE "mentor_cohort" (
     "is_active" boolean,
     "started_on" timestamp,
     "ended_on" timestamp,
-    PRIMARY KEY ("id "),
+    PRIMARY KEY ("id"),
     FOREIGN KEY ("mentor_id") REFERENCES mentor_details("id"),
     FOREIGN KEY ("cohort_code") REFERENCES cohort("cohort_code")
 );
@@ -228,7 +228,7 @@ CREATE TABLE "mentor_cohort" (
 
 CREATE TABLE "student_education" (
     "id" int NOT NULL,
-    "student_id " int,
+    "student_id" int,
     "education_category_id" int,
     "education_course_id" int,
     "subject_id" int,
@@ -245,7 +245,7 @@ CREATE TABLE "student_education" (
 
 
 CREATE INDEX "student_education_index_1"
-ON "student_education" ("student_id ", "education_category_id");
+ON "student_education" ("student_id", "education_category_id");
 
 
 CREATE TABLE "student_session" (
@@ -253,7 +253,7 @@ CREATE TABLE "student_session" (
     "student_id" int,
     "session_id" int,
     "duration_in_min" int,
-    "watched on" date,
+    "watched_on" date,
     PRIMARY KEY ("id"),
     FOREIGN KEY ("student_id") REFERENCES student_details("id"),
     FOREIGN KEY ("session_id") REFERENCES live_session("id")
@@ -386,8 +386,7 @@ CREATE TABLE "accelerator_project_details" (
     "cohort_code" varchar(6),
     "project_title" text,
     "description" text,
-    "marks" int,
-    "max_marks" int
+    "max_marks" int        --- max marks that a student can get is 60.
     "start_date" date,
     "end_date" date,
     PRIMARY KEY ("id"),
@@ -449,10 +448,10 @@ CREATE TABLE "accelerator_student_project_performance" (
     "awareness_score" int,
     "attentiveness_score" int,
     "quality_score" int,
-    "max_score" int,
-    "tasks_assigned" text[],
-    "theme" enum,           --- Week 1 :Project Initiation and Goal Setting, Week 2 :Project Planning and Development, Week 3:Review and Experimental Design(Capture attention)....
-    "7E learning phase for this week" enum,   -- Elicit-Week 1-2, Engage -Week 3-5, Explore- Week 6-8, Explain -Week 9,....
+    "max_score" int,                    -- The max score is consistent for all parameters i.e here it is 5.
+    "tasks_assigned" text[],            -- Array containing list of tasks
+    "project_theme_week" enum,           --- Week 1 :Project Initiation and Goal Setting, Week 2 :Project Planning and Development, Week 3:Review and Experimental Design(Capture attention)....
+    "learning_phase_week" enum,          -- Elicit-Week 1-2, Engage -Week 3-5, Explore- Week 6-8, Explain -Week 9,....
     "is_active" boolean,
     "updated_at" timestamp,
     "dropout_reason" text,
@@ -470,7 +469,7 @@ CREATE TABLE "accelerator_student_mentor_interaction" (
     "student_id" int,
     "mentor_id" int,
     "project_details_id" int,
-    "total_session" int,
+    "num_sessions" int,
     "average_duration" int,
     "attended_sessions" int,     
     "number_of_whatsapp_interaction" int,   
