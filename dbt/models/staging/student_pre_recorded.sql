@@ -35,19 +35,19 @@ student_session_info AS (
     SELECT
         "Email" AS email,
         "Session_Code" AS session_code,      -- MC01,MC02,SUK0,VID01,VID02,...   
-        "Duration_in_hrs" AS watchtime_in_hrs
+        "Duration_in_secs" AS watchtime_in_secs
     FROM {{ source('raw', 'student_session_information') }}
     WHERE "Session_Code" LIKE 'VID%' 
     
 ),
 
-final_mapped_cte AS (
+student_pre_recorded_data AS (
     SELECT
-        ROW_NUMBER() OVER () AS id,
+        ROW_NUMBER() OVER () AS id,                      
         g.student_id,
         r.resource_id,
         c.cohort_code,
-        s.watchtime_in_hrs,
+        s.watchtime_in_secs,
         NULL AS watched_at    
     FROM student_session_info s
     INNER JOIN raw_general_info_data g    --Take email ids present in the registration detail sheet as the final email id count.
@@ -60,5 +60,5 @@ final_mapped_cte AS (
 )
 
 
-SELECT * FROM final_mapped_cte
+SELECT * FROM student_pre_recorded_data
 

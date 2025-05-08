@@ -7,13 +7,13 @@
 WITH resource_cte AS (
     SELECT 
         ROW_NUMBER() OVER () AS id,  -- Auto-generate a unique ID for session
-        "Category" AS category,  --- Pre-recorded, Quiz, assignment, video  
+        "Category" AS category,      --- Pre-recorded, Quiz, assignment, video  
         "Title" AS title,
         "Content Name" AS description,
         NULL AS location,
         NULL AS resource_link,
         "Is_Video" AS is_video_resource,
-        "Time" AS total_duration
+        "Time" AS total_duration      ---Total duration in sec
 
       FROM {{ source('raw', 'resource_details') }}
 )

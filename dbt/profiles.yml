@@ -1,0 +1,12 @@
+data_pipelines_v2:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: [hostname]
+      user: [username]
+      password: [password]
+      port: [port]
+      dbname: [database name] # or database instead of dbname
+      schema: staging         # Refers to the schema name where the staging models should get populated. 
+      threads: 4

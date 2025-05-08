@@ -34,7 +34,7 @@ raw_student_session_info AS (
     SELECT
         "Email" AS email,
         "Session_Code" AS session_code,
-        "Duration_in_mins" as duration_in_mins
+        "Duration_in_secs" as duration_in_secs
     FROM {{ source('raw', 'student_session_information') }}
     WHERE "Session_Code" LIKE 'SUK%' 
        OR "Session_Code" LIKE 'WS%'      
@@ -46,7 +46,7 @@ student_live_session_cte AS (
         ROW_NUMBER() OVER () AS id,
         g.student_id,
         s.session_id,               -- Workshop data needs to be included (still yet to come from operations team)
-        ssi.duration_in_mins
+        ssi.duration_in_secs
     FROM raw_student_session_info ssi
     INNER JOIN raw_general_info_data g    --Take email ids present in the registration detail sheet as the final email id count.
         ON ssi.email = g.email
