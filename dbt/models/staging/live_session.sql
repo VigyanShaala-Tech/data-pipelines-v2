@@ -34,7 +34,7 @@ live_session_cte AS (
         s.name,
         s.type,     ---Speak Up Kalpana, Masterclass, Workshop. Workshop data isn't included(yet to come fom operations team)
         s.code,     --Maps student wise attended sessions in respective cohort
-        ROUND(CAST(s.duration_in_sec AS numeric) / 60.0, 2) AS duration_in_min,  -- Convert seconds to hours
+        s.duration_in_sec,  -- Convert seconds to hours
         s.conducted_on
     FROM session_cte s
     INNER JOIN cohort_cte c      -- Inner join since no session can exsist without a cohort.

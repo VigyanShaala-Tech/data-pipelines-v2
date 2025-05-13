@@ -8,9 +8,7 @@
 
 WITH student_cte AS (
   SELECT 
-    -- TODO: Add student_id in the raw general_information_sheet.
-    ---"Student_id" AS id
-    NULL AS id,
+    "Student_id" AS id,
     "Email" AS email,
 
     -- If name has "." in it, the part before it is last name, everything else is first name
