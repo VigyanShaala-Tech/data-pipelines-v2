@@ -7,11 +7,11 @@
 WITH location_cte AS (
     -- Ensure unique locations before assigning location_id
     SELECT DISTINCT  
-        location_details."Country" AS country,
-        country_seed.country_code,  -- Fetch country code from seed file
-        location_details."State_Union_Territory" AS state_union_territory,
-        location_details."District" AS district,
-        location_details."City_Category" AS location_category
+        location_details."Country"::VARCHAR(50) AS country,
+        country_seed.country_code::VARCHAR(2),  -- Fetch country code from seed file
+        location_details."State_Union_Territory"::VARCHAR(60) AS state_union_territory,
+        location_details."District"::VARCHAR(60) AS district,
+        location_details."City_Category"::TEXT AS location_category
     FROM {{ source('raw', 'general_information_sheet') }} location_details
     LEFT JOIN {{ ref('country_code') }} country_seed
     ON LOWER(location_details."Country") = LOWER(country_seed.country_name)  -- Case insensitive match
@@ -19,7 +19,7 @@ WITH location_cte AS (
 
 unique_location_cte AS (
     SELECT 
-        CAST(ROW_NUMBER() OVER (ORDER BY country, state_union_territory, district, location_category) AS INT) AS id,  
+        ROW_NUMBER() OVER (ORDER BY country, state_union_territory, district, location_category)::INT AS id,  
         country,
         country_code,
         state_union_territory,

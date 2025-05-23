@@ -7,6 +7,6 @@ data_pipelines_v2_1:
       user: postgres
       password: VS@123
       port: 5432
-      dbname: She_for_STEM # or database instead of dbname
+      dbname: She_for_STEM_V2 # or database instead of dbname
       schema: staging
       threads: 4
