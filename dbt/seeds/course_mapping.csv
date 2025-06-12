@@ -1,3 +1,33 @@
-display_name,course_name   ---This csv file for now contains demo data which will be updated further.
-BSC,BSc
-MSC,MSc
+display_name,course_name
+B.E./B.Tech,BE_BTech 
+BSc.,BSc
+Integrated BS-MS or BSc.-MSc,Integrated_BS_MS_or_BSc_MSc
+Integrated Dual Degree(BTech + MTech),Integrated_Dual_Degree_BTech_MTech
+BCA/BCS,BCA_BCS
+B.Arch,BArch
+MSc.,MSc
+M.E./M.Tech,ME_MTech
+MCS / MCA,MCS_MCA
+M.Arch,MArch
+PhD,PhD
+BBA,BBA
+B.Pharmacy,BPharmacy
+M.Pharma,MPharma
+MBA,MBA
+B.Ed,BEd
+M.Ed,MEd
+B.Com,BCom
+M.Com,MCom
+Class 12th,Class_12th
+Class 11th (PCM),Class_11th_PCM
+Class 10th,Class_10th
+Class 9th,Class_9th
+Class 8th,Class_8th
+Class 7th,Class_7th
+Class 6th,Class_6th
+Class 5th,Class_5th
+Class 4th,Class_4th
+Class 3rd,Class_3rd
+Class 2nd,Class_2nd
+Class 1st,Class_1st
+Class Pre 1st,Pre_Class_1st

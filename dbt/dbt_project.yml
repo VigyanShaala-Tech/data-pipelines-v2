@@ -39,8 +39,8 @@ seeds:
     course_mapping:
       +schema: raw  # Optional: define a custom schema
       +column_types:
-        course_name: text
-        display_name: text
+        Course_name: text
+        Display_name: text
     subject_mapping:
       +schema: raw  # Optional: define a custom schema
       +column_types:
@@ -53,6 +53,9 @@ seeds:
         State_Union_Territory: text
         District: text
         City_Category: text
+    college_mapping:
+        Standard_College_Names: text
+        Standard_University_Names: text
 
 
 models:
