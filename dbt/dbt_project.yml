@@ -44,8 +44,10 @@ seeds:
     subject_mapping:
       +schema: raw  # Optional: define a custom schema
       +column_types:
-        subject_name: text
-        display_name: text
+        education_category: text
+        subject_area: text
+        display_sub_field: text
+        sub_field: text
     location_mapping:
       +schema: raw  # Optional: define a custom schema
       +column_types:
