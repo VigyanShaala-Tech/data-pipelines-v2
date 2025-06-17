@@ -1,7 +1,7 @@
-Display_name,Course_name
+display_name,course_name
 B.E./B.Tech,BE_BTech 
 BSc.,BSc
-Integrated BS-MS or BSc.-MSc,Integrated_BS_MS_or_BSc_MSc
+Integrated BS-MS or BSc-MSc,Integrated_Bachelors_Masters
 Integrated Dual Degree(BTech + MTech),Integrated_Dual_Degree_BTech_MTech
 BCA/BCS,BCA_BCS
 B.Arch,BArch
@@ -10,14 +10,11 @@ M.E./M.Tech,ME_MTech
 MCS / MCA,MCS_MCA
 M.Arch,MArch
 PhD,PhD
-BBA,BBA
 B.Pharmacy,BPharmacy
 M.Pharma,MPharma
 MBA,MBA
 B.Ed,BEd
 M.Ed,MEd
-B.Com,BCom
-M.Com,MCom
 Class 12th,Class_12th
 Class 11th (PCM),Class_11th_PCM
 Class 10th,Class_10th

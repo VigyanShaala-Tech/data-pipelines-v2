@@ -1,4 +1,4 @@
-Country,State/Union Territory,District ,City Category
+country,state_union_territory,district,city_category
 India,Andaman and Nicobar Islands,Nicobars,"Tier 1 City (Mumbai, Delhi, and similar cities)"
 India,Andaman and Nicobar Islands,Nicobars,"Tier 2 and Tier 3 Cities (Guntur, Patna, Chandigarh, Kanpur, Srinagar, Bhopal, Thrissur, Kolhapur, Dehradun and other small cities)"
 India,Andaman and Nicobar Islands,Nicobars,"Towns and Rural Villages (Not Cities, typically less than 5-10 lac population)"
