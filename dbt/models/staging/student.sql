@@ -39,9 +39,47 @@ WITH student_cte AS (
     END AS date_of_birth,
 
     "Caste_Category" AS caste,
-    "Annual_Family_Income" AS annual_family_income
+    "Annual_Family_Income" AS annual_family_income_inr
 
   FROM {{ source('raw', 'general_information_sheet') }}
+),
+
+raw_general_data AS (
+    SELECT
+        "Student_id" AS student_id,
+        "Country" AS country,
+        "State_Union_Territory" AS state_union_territory,
+        "District" AS district,
+        "City_Category" AS city_category
+    FROM {{ source('raw', 'general_information_sheet') }}
+    
+),
+
+location_data AS (
+    SELECT    
+        "Country" AS country,
+        "State/Union Territory" AS state_union_territory,
+        "District " AS district,
+        "City Category" AS city_category,
+        ROW_NUMBER() OVER (
+            ORDER BY "Country", "State/Union Territory", "District ", "City Category"
+        ) AS location_id
+    FROM {{ ref('location_mapping') }}
+),
+
+student_details AS (
+    SELECT
+        s.*,
+        l.location_id
+    FROM student_cte s
+    INNER JOIN raw_general_data g        
+        ON s.id = g.student_id                -- The id in student_cte maps to student_id in the raw data, enabling location joins.
+    LEFT JOIN location_data l
+        ON g.country = l.country
+        AND g.state_union_territory = l.state_union_territory
+        AND g.district = l.district
+        AND g.city_category = l.city_category
 )
 
-SELECT * FROM student_cte
+
+SELECT * FROM student_details

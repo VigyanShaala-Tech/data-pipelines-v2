@@ -30,22 +30,49 @@ clean-targets:         # directories to be removed by `dbt clean`
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 seeds:
-  raw_data:  # schema in your model reference
+  data_pipelines_v2:     # <-- match your project or folder name here
+
     country_code:
-      +schema: raw  # Optional: define a custom schema
       +column_types:
         country_name: text
         country_code: text
+
     course_mapping:
-      +schema: raw  # Optional: define a custom schema
       +column_types:
         course_name: text
         display_name: text
+      +post-hook:
+        - "CREATE INDEX IF NOT EXISTS idx_course_mapping_display_name ON {{ this }} (display_name)"
+
     subject_mapping:
-      +schema: raw  # Optional: define a custom schema
       +column_types:
-        subject_name: text
-        display_name: text
+        education_category: text
+        subject_area: text
+        sub_field: text
+      +post-hook:
+        - "CREATE INDEX IF NOT EXISTS idx_subject_mapping_education_category ON {{ this }} (education_category)"
+        - "CREATE INDEX IF NOT EXISTS idx_subject_mapping_subject_area ON {{ this }} (subject_area)"
+        - "CREATE INDEX IF NOT EXISTS idx_subject_mapping_sub_field ON {{ this }} (sub_field)"
+        
+    location_mapping:
+      +column_types:
+        country: text
+        state_union_territory: text
+        district: text
+        city_category: text
+      +post-hook:
+        - "CREATE INDEX IF NOT EXISTS idx_state ON {{ this }} (state_union_territory)"
+        - "CREATE INDEX IF NOT EXISTS idx_district ON {{ this }} (district)"
+        - "CREATE INDEX IF NOT EXISTS idx_country ON {{ this }} (country)"
+        - "CREATE INDEX IF NOT EXISTS idx_city_category ON {{ this }} (city_category)"
+
+    college_mapping:
+      +column_types:
+        standard_college_names: text
+        standard_university_names: text
+      +post-hook:
+        - "CREATE INDEX IF NOT EXISTS idx_college_mapping_standard_college_names ON {{ this }} (standard_college_names)"
+        - "CREATE INDEX IF NOT EXISTS idx_college_mapping_standard_university_names ON {{ this }} (standard_university_names)"
 
 
 models:

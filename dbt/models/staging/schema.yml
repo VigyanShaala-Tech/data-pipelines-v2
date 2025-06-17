@@ -131,7 +131,7 @@ models:
           - not_null
           - primary_key
       
-      - name: id  #primary key in location table
+      - name: location_id  #primary key in location table
         description: "References the location from location table"
         tests:
           - not_null
@@ -240,7 +240,7 @@ models:
         description: "Cohort name"
         data_type: varchar(50)
       - name: type
-        description: "Type of cohort"   -- open, curriculum
+        description: "Type of cohort"   # open, curriculum
         data_type: enum
       - name: start_date
         description: "Start date of cohort"
