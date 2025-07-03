@@ -30,3 +30,29 @@ Try running the following commands:
 ### Resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
 - Naming conventions [style guide](https://docs.getdbt.com/best-practices/how-we-style/1-how-we-style-our-dbt-models)
+
+
+
+### Approach for data handling and presentation
+
+- Database schema creation
+  1. Use SQL scripts to define and create all database tables.
+  2.Incorporate the following within the SQL scripts:
+    a) Table schemas with appropriate data types and constraints.
+    b) Indexes for optimizing query performance.
+    c) ENUMs for constrained categorical fields.
+    d) Default values, NOT NULL, Primary Key, Foreign Key and CHECK constraints for data integrity.
+
+- Data transformation and insertion
+  1. Write a Python script to transform old database or unstructured data into the new data model format.
+  2. This script will handle:
+    a) Data transformation.
+    b) Field mapping to new schema.
+    c) Batch insertion (inserting multiple rows of data in a single operation) into the database.
+    d) Handling joins by merging multiple dataframes and creating a new structured dataframe ready for insertion.
+    
+- Presentation layer using dbt
+  1. Use dbt to model and present the final structured data.
+  2. dbt will fetch the cleaned and transformed data from the database and will:
+    a) Create final models for reporting and analytics.
+    b) Apply transformations, filters, and aggregations as needed.    
