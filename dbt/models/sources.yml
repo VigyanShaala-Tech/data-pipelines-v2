@@ -53,3 +53,4 @@ sources:
         description: "Raw student attended session details data"
       - name: resource_details
         description: "Raw resource shared like pre-recorded videos, assignments,.. details"
+      - name: general_information_sheet_f

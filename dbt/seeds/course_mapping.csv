@@ -1,30 +1,30 @@
-display_name,course_name
-B.E./B.Tech,BE_BTech 
-BSc.,BSc
-Integrated BS-MS or BSc-MSc,Integrated_Bachelors_Masters
-Integrated Dual Degree(BTech + MTech),Integrated_Dual_Degree_BTech_MTech
-BCA/BCS,BCA_BCS
-B.Arch,BArch
-MSc.,MSc
-M.E./M.Tech,ME_MTech
-MCS / MCA,MCS_MCA
-M.Arch,MArch
-PhD,PhD
-B.Pharmacy,BPharmacy
-M.Pharma,MPharma
-MBA,MBA
-B.Ed,BEd
-M.Ed,MEd
-Class 12th,Class_12th
-Class 11th (PCM),Class_11th_PCM
-Class 10th,Class_10th
-Class 9th,Class_9th
-Class 8th,Class_8th
-Class 7th,Class_7th
-Class 6th,Class_6th
-Class 5th,Class_5th
-Class 4th,Class_4th
-Class 3rd,Class_3rd
-Class 2nd,Class_2nd
-Class 1st,Class_1st
-Class Pre 1st,Pre_Class_1st
+course_id,display_name,course_name
+1,B.E./B.Tech,BE_BTech 
+2,BSc.,BSc
+3,Integrated BS-MS or BSc-MSc,Integrated_Bachelors_Masters
+4,Integrated Dual Degree(BTech + MTech),Integrated_Dual_Degree_BTech_MTech
+5,BCA/BCS,BCA_BCS
+6,B.Arch,BArch
+7,MSc.,MSc
+8,M.E./M.Tech,ME_MTech
+9,MCS / MCA,MCS_MCA
+10,M.Arch,MArch
+11,PhD,PhD
+12,B.Pharmacy,BPharmacy
+13,M.Pharma,MPharma
+14,MBA,MBA
+15,B.Ed,BEd
+16,M.Ed,MEd
+17,Class 12th,Class_12th
+18,Class 11th (PCM),Class_11th_PCM
+19,Class 10th,Class_10th
+20,Class 9th,Class_9th
+21,Class 8th,Class_8th
+22,Class 7th,Class_7th
+23,Class 6th,Class_6th
+24,Class 5th,Class_5th
+25,Class 4th,Class_4th
+26,Class 3rd,Class_3rd
+27,Class 2nd,Class_2nd
+28,Class 1st,Class_1st
+29,Class Pre 1st,Pre_Class_1st

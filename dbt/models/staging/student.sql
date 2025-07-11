@@ -1,34 +1,12 @@
 {{ config(
   materialized='incremental',
+  unique_key='id',  
   on_schema_change='sync_all_columns',
   post_hook=[
-    """
-    DO $$ BEGIN
-      -- Create the sequence if it doesn't exist
-      IF NOT EXISTS (
-        SELECT 1 FROM pg_class WHERE relname = 'student_id_seq' AND relkind = 'S'  
-      ) THEN
-        CREATE SEQUENCE student_id_seq;
-      END IF;
-
-      -- Move sequence to max(id)+1
-      PERFORM setval(
-        'student_id_seq',
-        COALESCE((SELECT MAX(id) FROM {{ this }}), 0) + 1,
-        false
-      );
-
-      -- Attach sequence to id column
-      EXECUTE format(
-        'ALTER TABLE %I.%I ALTER COLUMN id SET DEFAULT nextval(''student_id_seq'')',
-        '{{ this.schema }}',
-        '{{ this.identifier }}'
-      );
-    END $$;
-    """
+   
+    "SELECT setval(pg_get_serial_sequence('vg_prod.student_details', 'id'), (SELECT MAX(id) FROM vg_prod.student_details));"
   ]
 ) }}
-
 
 WITH student_cte AS (
   SELECT 
@@ -59,8 +37,12 @@ WITH student_cte AS (
       WHEN "Date_of_Birth" ILIKE 'Null' OR "Date_of_Birth" IS NULL THEN NULL
       ELSE CAST("Date_of_Birth" AS DATE) 
     END::DATE AS date_of_birth,
+    
+    CASE
+      WHEN "Caste_Category" = 'Null' OR "Caste_Category" IS NULL THEN NULL
+      ELSE "Caste_Category"::TEXT
+    END AS caste,
 
-    "Caste_Category"::TEXT AS caste,
     "Annual_Family_Income"::TEXT AS annual_family_income_inr
 
   FROM {{ source('raw', 'general_information_sheet') }}
@@ -78,21 +60,27 @@ raw_general_data AS (
 ),
 
 location_data AS (
-    SELECT    
-        country::VARCHAR(50),
-        state_union_territory::VARCHAR(60),
-        district::VARCHAR(60),
-        city_category::TEXT,
-        (ROW_NUMBER() OVER (
-            ORDER BY country, state_union_territory, district, city_category
-        ))::INT AS location_id
+    SELECT 
+        location_id,
+        country,
+        state_union_territory,
+        district,
+        city_category
     FROM {{ ref('location_mapping') }}
 ),
 
 student_details AS (
     SELECT
-        s.*,
-        l.location_id
+        s.id,
+        s.email,
+        s.first_name,
+        s.last_name,
+        s.gender,
+        s.phone,
+        s.date_of_birth,
+        s.caste,
+        s.annual_family_income_inr,
+        l.location_id::INT AS location_id
     FROM student_cte s
     INNER JOIN raw_general_data g        
         ON s.id = g.raw_student_id                -- The id in student_cte maps to student_id in the raw data, enabling location joins.

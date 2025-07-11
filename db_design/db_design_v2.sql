@@ -81,16 +81,14 @@ CREATE TABLE "student_cohort" (
 
 
 CREATE TABLE "student_details" (
-    "id" int NOT NULL,
+    "id" SERIAL PRIMARY KEY,
     "email" varchar(254),
     "first_name" varchar(100),
     "last_name" varchar(100),
-    "gender" enum,         -- male, female and other
-    "is_female" boolean,
-    "is_indian" boolean,
+    "gender" text,         enum -- male, female and other
     "phone" varchar(15),       -- To Do- Phone number should be 10 digit in dbt.Once the student selects country from the drop down, the form should populate the country code automatically
     "date_of_birth" date,
-    "caste" enum,         -- OBC, ST/SC, Others
+    "caste" text,         enum -- OBC, ST/SC, Others
     "annual_family_income_inr" text,     -- Needs to be converted to range. (should be in INR)'
     "location_id" int,    
     PRIMARY KEY ("id"),
