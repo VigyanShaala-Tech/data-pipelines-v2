@@ -4,7 +4,7 @@
   on_schema_change='sync_all_columns',
   post_hook=[
    
-    "SELECT setval(pg_get_serial_sequence('vg_prod.student_registration_details', 'id'), (SELECT MAX(id) FROM vg_prod.student_registration_details));"
+    "SELECT setval(pg_get_serial_sequence('intermediate.student_registration_details', 'id'), (SELECT MAX(id) FROM intermediate.student_registration_details));"
   ]
 ) }}
 

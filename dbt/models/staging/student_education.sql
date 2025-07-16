@@ -2,7 +2,7 @@
   materialized='incremental',
   on_schema_change='sync_all_columns',
   post_hook=[
-    "SELECT setval(pg_get_serial_sequence('vg_prod.student_education', 'id'), (SELECT MAX(id) FROM vg_prod.student_education));"
+    "SELECT setval(pg_get_serial_sequence('intermediate.student_education', 'id'), (SELECT MAX(id) FROM intermediate.student_education));"
   ]
 ) }}
 
