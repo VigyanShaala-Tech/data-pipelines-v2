@@ -29,7 +29,7 @@ WITH student_cte AS (
       WHEN "Gender" ILIKE 'Female' THEN 'F'
       WHEN "Gender" ILIKE 'Male' THEN 'M'
       ELSE 'O'
-    END::gender_enum AS gender,
+    END::intermediate.gender_enum AS gender,
 
     "Phone"::VARCHAR(15) AS phone,
 
