@@ -1,3 +1,2 @@
 dbt-core==1.9.3
-dbt-mysql==1.7.0
 dbt-postgres==1.9.0
