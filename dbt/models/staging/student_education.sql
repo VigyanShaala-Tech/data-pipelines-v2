@@ -1,51 +1,98 @@
+{{ config(
+  materialized='incremental',
+  on_schema_change='sync_all_columns',
+  post_hook=[
+    "SELECT setval(pg_get_serial_sequence('intermediate.student_education', 'id'), (SELECT MAX(id) FROM intermediate.student_education));"
+  ]
+) }}
+
 WITH student_data AS (
-    SELECT id, email, annual_family_income
-    FROM {{ ref('student') }}
-    ORDER BY id ASC
+    SELECT id, email
+    FROM {{ ref('student_details') }}
 ),
 
 subject_data AS (
-    SELECT id AS subject_id, subject_name, display_name
-    FROM {{ ref('subject') }}
+    SELECT 
+        id, 
+        subject_area,
+        sub_field
+    FROM {{ ref('subject_mapping') }}
 ),
 
 college_data AS (
-    SELECT id AS college_id, college
-    FROM {{ ref('college') }}
-),
-
-education_category_data AS (
-    SELECT id AS education_category_id,category_name
-    FROM {{ ref('education_category') }}
+    SELECT
+        college_id,   
+        standard_college_names::VARCHAR(200) AS college_name
+    FROM {{ ref('college_mapping') }}
 ),
 
 education_course_data AS (
-    SELECT id AS course_id,course_name,display_name
-    FROM {{ ref('education_course') }}
+    SELECT 
+        course_id, 
+        display_name,
+        course_name
+    FROM {{ ref('course_mapping') }}
+),
+
+location_data AS (
+    SELECT 
+        location_id,
+        country,
+        state_union_territory,
+        district,
+        city_category
+    FROM {{ ref('location_mapping') }}
 ),
 
 raw_mapping AS (
     SELECT 
       "Student_id" AS student_id, 
-      "Subject_Area" AS subject_name, 
+      "Subject_Area" AS subject_names,
       "Name_of_College_University" AS college_name,
       "Currently_Pursuing_Degree" AS education_course,
-      Null AS education_category
-    FROM {{ source('raw', 'general_information_sheet') }} 
+      "Country" AS country,
+      "State_Union_Territory" AS state_union_territory,
+      "District" AS district,
+      "City_Category" AS city_category
+    FROM {{ source('raw', 'general_information_sheet') }}
+),
+
+split_subjects AS (
+    SELECT 
+        r.student_id,
+        r.college_name,
+        r.education_course,
+        r.country,
+        r.state_union_territory,
+        r.district,
+        r.city_category,
+        TRIM(LOWER(subject)) AS subject_cleaned
+    FROM raw_mapping r,
+         UNNEST(string_to_array(r.subject_names, ',')) AS subject
 )
 
 
----To do: Put start_year, end_year logic based on the registration date and currently pursuing year. Also try to add the seed file for degree years.
 SELECT 
-    ROW_NUMBER() OVER () AS id, -- Unique ID for the mapping
-    student_data.id,
-    subject_data.subject_id,
-    college_data.college_id,
-    education_course_data.course_id,
-    education_category_data.education_category_id
-FROM raw_mapping
-LEFT JOIN student_data ON raw_mapping.student_id = student_data.id
-LEFT JOIN subject_data ON raw_mapping.subject_name = subject_data.display_name
-LEFT JOIN college_data ON raw_mapping.college_name = college_data.college
-LEFT JOIN education_course_data ON raw_mapping.education_course = education_course_data.display_name
-LEFT JOIN education_category_data ON raw_mapping.education_category = education_category_data.category_name
+    s.id::INT AS id,
+    s.id::INT AS student_id,
+    e.course_id::INT AS education_course_id,
+    ARRAY_AGG(DISTINCT sub.id) FILTER (WHERE sub.id IS NOT NULL)::INT[] AS subject_id,
+    NULL::INT AS interest_subject_id,
+    NULL::INT AS university_id,
+    c.college_id::INT AS college_id,
+    l.location_id::INT AS college_location_id,
+    NULL::INT AS start_year,
+    NULL::INT AS end_year
+
+FROM split_subjects r
+INNER JOIN student_data s ON r.student_id = s.id
+LEFT JOIN college_data c ON TRIM(LOWER(r.college_name)) = TRIM(LOWER(c.college_name))
+LEFT JOIN location_data l 
+      ON r.country = l.country
+      AND r.state_union_territory = l.state_union_territory
+      AND r.district = l.district
+      AND r.city_category = l.city_category
+LEFT JOIN education_course_data e ON TRIM(LOWER(r.education_course)) = TRIM(LOWER(e.display_name))
+LEFT JOIN subject_data sub 
+  ON TRIM(LOWER(r.subject_cleaned)) = TRIM(LOWER(sub.sub_field))
+GROUP BY s.id, c.college_id, e.course_id, l.location_id

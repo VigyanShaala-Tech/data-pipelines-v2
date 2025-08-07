@@ -4,7 +4,7 @@
   on_schema_change='sync_all_columns',
   post_hook=[
    
-    "SELECT setval(pg_get_serial_sequence('vg_prod.student_details', 'id'), (SELECT MAX(id) FROM vg_prod.student_details));"
+    "SELECT setval(pg_get_serial_sequence('intermediate.student_details', 'id'), (SELECT MAX(id) FROM intermediate.student_details));"
   ]
 ) }}
 
@@ -29,7 +29,7 @@ WITH student_cte AS (
       WHEN "Gender" ILIKE 'Female' THEN 'F'
       WHEN "Gender" ILIKE 'Male' THEN 'M'
       ELSE 'O'
-    END::TEXT AS gender,
+    END::intermediate.gender_enum AS gender,
 
     "Phone"::VARCHAR(15) AS phone,
 

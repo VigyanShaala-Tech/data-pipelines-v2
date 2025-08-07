@@ -39,41 +39,39 @@ seeds:
 
     course_mapping:
       +column_types:
+        course_id: int
         course_name: text
         display_name: text
-      +post-hook:
-        - "CREATE INDEX IF NOT EXISTS idx_course_mapping_display_name ON {{ this }} (display_name)"
+      
 
     subject_mapping:
       +column_types:
+        subject_id: int
         education_category: text
         subject_area: text
         sub_field: text
-      +post-hook:
-        - "CREATE INDEX IF NOT EXISTS idx_subject_mapping_education_category ON {{ this }} (education_category)"
-        - "CREATE INDEX IF NOT EXISTS idx_subject_mapping_subject_area ON {{ this }} (subject_area)"
-        - "CREATE INDEX IF NOT EXISTS idx_subject_mapping_sub_field ON {{ this }} (sub_field)"
+      
         
     location_mapping:
       +column_types:
+        location_id: int
         country: text
         state_union_territory: text
         district: text
         city_category: text
-      +post-hook:
-        - "CREATE INDEX IF NOT EXISTS idx_state ON {{ this }} (state_union_territory)"
-        - "CREATE INDEX IF NOT EXISTS idx_district ON {{ this }} (district)"
-        - "CREATE INDEX IF NOT EXISTS idx_country ON {{ this }} (country)"
-        - "CREATE INDEX IF NOT EXISTS idx_city_category ON {{ this }} (city_category)"
+      
 
     college_mapping:
       +column_types:
+        college_id: int
         standard_college_names: text
-        standard_university_names: text
-      +post-hook:
-        - "CREATE INDEX IF NOT EXISTS idx_college_mapping_standard_college_names ON {{ this }} (standard_college_names)"
-        - "CREATE INDEX IF NOT EXISTS idx_college_mapping_standard_university_names ON {{ this }} (standard_university_names)"
+      
 
+    university_mapping:
+      +column_types:
+        university_id: int
+        standard_university_names: text
+      
 
 models:
   data_pipelines_v2:
