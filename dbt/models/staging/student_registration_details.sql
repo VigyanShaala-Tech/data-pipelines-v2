@@ -20,7 +20,12 @@ WITH registration_cte AS (
       'how_did_you_hear_about_us', gs."How_did_you_hear_about_us",
       'is_studying_STEM_fields', NULL,
       'reason_for_applying', NULL,
-      'problems_faced_in_studies_and_career', NULL
+      'problems_faced_in_studies_and_career', gs."Problems",
+      'motivation', gs."Motivation",
+      'new_college_name', gs."New_College_Name",
+      'new_university_name', gs."new_university_name",
+      'partner_organization', gs."partner_organization",
+      'currently_pursuing_year', gs."Currently_Pursuing_Year"
     )::JSONB AS form_details
 
   FROM {{ source('raw', 'general_information_sheet') }} AS gs
